@@ -1,7 +1,7 @@
 import React from "react";
 
 const BookMarksPage = () => {
-  return <div>BookMarksPage</div>;
+  return <div>BookMarksPagePrivetAidana</div>;
 };
 
 export default BookMarksPage;

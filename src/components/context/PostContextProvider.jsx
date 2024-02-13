@@ -1,13 +1,15 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { useNavigate } from "react-router-dom";
 import { ACTIONS, API } from "../../helpers/const";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 export const postContext = createContext();
 export const usePosts = () => useContext(postContext);
+
 const INIT_STATE = {
   posts: [],
   onePost: {},
-}
+};
+
 const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case ACTIONS.GET_POSTS:
@@ -58,5 +60,4 @@ const PostContextProvider = ({ children }) => {
     <postContext.Provider value={values}>{children}</postContext.Provider>
   );
 };
-
 export default PostContextProvider;

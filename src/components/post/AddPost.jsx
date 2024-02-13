@@ -1,27 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import { usePosts } from '../context/PostContextProvider'
-import { Box, Button, TextField, Typography } from '@mui/material';
+import React, { useEffect, useState } from "react";
+import { usePosts } from "../context/PostContextProvider";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 const AddPost = () => {
-  const {addPost, getPosts, posts} = usePosts()
+  const { addPost, getPosts, posts } = usePosts();
   const [post, setPost] = useState({
     title: "",
     description: "",
     img: "",
   });
-  useEffect(()=>{
-    getPosts()
-  },[])
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   const handleInput = (e) => {
-      const obj = { ...post, [e.target.name]: e.target.value };
-      setPost(obj);
-    }
+    const obj = {
+      ...post,
+      [e.target.name]: e.target.value,
+    };
+    setPost(obj);
+  };
+
   const handleClick = () => {
     addPost(post);
   };
+
   return (
     <div>
-       <Box
+      <Box
         sx={{
           width: "100vh",
           height: 500,
@@ -32,7 +39,7 @@ const AddPost = () => {
         }}
       >
         <Typography variant="h4" align="center">
-         CREATE POST
+          CREATE POST
         </Typography>
         <TextField
           onChange={handleInput}
@@ -57,9 +64,8 @@ const AddPost = () => {
         />
         <Button onClick={handleClick}>ADD POST</Button>
       </Box>
-  
     </div>
-  )
-}
+  );
+};
 
-export default AddPost
+export default AddPost;

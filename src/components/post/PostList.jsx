@@ -1,24 +1,19 @@
-import React, { useEffect } from 'react'
-import { usePosts } from '../context/PostContextProvider';
-import { Box } from '@mui/material';
-import PostCard from './PostCard';
+import React from "react";
+import { usePosts } from "../context/PostContextProvider";
+import PostCard from "./PostCard";
+import { Box } from "@mui/material";
 
 const PostList = () => {
-  const {getPosts, posts} = usePosts();
-
-  useEffect(()=>{
-    getPosts()
-  },[]);
+  const { posts, getPosts } = usePosts();
   return (
     <div>
-      <Box sx={{display:"flex", flexWrap:"wrap"}}>
-        {posts.map((elem)=>(
-          <PostCard key={elem.id} elem={elem}/>
+      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+        {posts.map((elem) => (
+          <PostCard key={elem.id} elem={elem} />
         ))}
-     </Box>
+      </Box>
     </div>
-  )
-}
+  );
+};
 
-export default PostList
-
+export default PostList;
