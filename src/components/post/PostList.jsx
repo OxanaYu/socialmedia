@@ -14,7 +14,7 @@ const PostList = () => {
   
   //! PAGINATION 
  const [page, setPage] = useState(1);
- const itemPerPage = 3;
+ const itemPerPage = 4;
  const count = Math.ceil(posts.length / itemPerPage)
  console.log(count);
  const currentData = () =>{

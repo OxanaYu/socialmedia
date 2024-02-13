@@ -4,8 +4,8 @@ import React from "react";
 const PaginationControlled = ({count, page, handleChange}) => {
   return (
     <Stack spacing={3}>
-      <Typography>Page{page}</Typography>
-    <Pagination count={count} color="primary" onChange={(e, value)=> handleChange(value)} />
+      <Typography sx={{display:"flex", justifyContent: "center"}}>Page{page}</Typography>
+    <Pagination sx={{display:"flex", justifyContent: "center"}} count={count} shape="rounded"  variant="outlined" color="primary" onChange={(e, value)=> handleChange(value)} />
     </Stack>
   )
 };

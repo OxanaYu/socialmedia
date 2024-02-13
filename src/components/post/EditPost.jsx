@@ -42,7 +42,7 @@ const EditPost = () => {
         }}
       >
         <Typography variant="h4" align="center">
-          CREATE POST
+          EDIT POST
         </Typography>
         <TextField
          value={post.title}
