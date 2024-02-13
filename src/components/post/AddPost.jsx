@@ -7,7 +7,7 @@ const AddPost = () => {
   const [post, setPost] = useState({
     title: "",
     description: "",
-    img: "",
+    Image: "",
   });
 
   useEffect(() => {

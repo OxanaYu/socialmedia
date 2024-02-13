@@ -26,12 +26,12 @@ const PostCard = ({elem}) => {
          <Typography color="black" fontSize="15px" fontWeight="700">
             {elem.description}
          </Typography>
-         <Button onClick={()=> deletePost(elem.id)}  color="error"
-            variant="contained"
+         <Button onClick={()=> deletePost(elem.id)}  color="primary"
+            variant="outlined"
             size="medium">
           DELETE
          </Button>
-         <Button onClick={()=>navigate(`/edit/${elem.id}`)} color="success" variant="contained" size="medium">
+         <Button onClick={()=>navigate(`/edit/${elem.id}`)} color="secondary" variant="outlined" size="medium">
           EDIT
          </Button>
        </CardContent>
