@@ -15,7 +15,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
@@ -45,10 +45,10 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const pages = [
-    { id: 1, tittle: "Posts", link: "/posts" },
-    { id: 2, tittle: "Add Post", link: "/addpage" },
-    { id: 3, tittle: "Contacts", link: "/contacts" },
-  ];
+  { id: 1, tittle: "Posts", link: "/posts" },
+  { id: 2, tittle: "Add Post", link: "/addpage" },
+  { id: 3, tittle: "Contacts", link: "/contacts" },
+];
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
@@ -127,9 +127,9 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-      <IconButton size="large" color="inherit">
-        <FavoriteIcon/>
-      </IconButton>
+        <IconButton size="large" color="inherit">
+          <FavoriteIcon />
+        </IconButton>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
             <MailIcon />
@@ -167,12 +167,21 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-            
           <Typography
             variant="h6"
             noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              fontSize: 40,
+              letterSpacing: ".3rem",
+              color: "white",
+              textDecoration: "none",
+            }}
           >
             META
           </Typography>
@@ -189,7 +198,7 @@ export default function PrimarySearchAppBar() {
           {pages.map((elem) => (
             <Link key={elem.id} to={elem.link}>
               <MenuItem>
-                <Typography sx={{ color: "white", }} textAlign={"center"}>
+                <Typography sx={{ color: "white" }} textAlign={"center"}>
                   {elem.tittle}
                 </Typography>
               </MenuItem>
@@ -197,9 +206,9 @@ export default function PrimarySearchAppBar() {
           ))}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <IconButton size="large" color="inherit">
-        <FavoriteIcon/>
-      </IconButton>
+            <IconButton size="large" color="inherit">
+              <FavoriteIcon />
+            </IconButton>
             <IconButton
               size="large"
               aria-label="show 4 new mails"
@@ -209,7 +218,7 @@ export default function PrimarySearchAppBar() {
                 <MailIcon />
               </Badge>
             </IconButton>
-            
+
             <IconButton
               size="large"
               aria-label="show 17 new notifications"

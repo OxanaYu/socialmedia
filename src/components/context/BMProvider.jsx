@@ -1,7 +1,14 @@
-import React from "react";
+// import React, { createContext, useContext } from "react";
+// const bmContext = createContext();
+// export const useBM = () => useContext(bmContext);
 
-const BMProvider = () => {
-  return <div>BMProvider</div>;
-};
+// const INIT_STATE = {
+//   bookmarks: JSON.parse(localStorage.getItem("bm")),
+//   bookmarksLength:
+// };
 
-export default BMProvider;
+// const BMProvider = () => {
+//   return <div>BMProvider</div>;
+// };
+
+// export default BMProvider;
