@@ -43,18 +43,32 @@ const PostContextProvider = ({ children }) => {
     };
     //! DELETE
     const deletePost = async(id)=>{
+      console.log(id);
       await axios.delete(`${API}/${id}`)
       getPosts()
     }
     //! GET PRODUCT
+  const getOnePost = async(id)=>{
+    const {data} = await axios (`${API}/${id}`)
+    dispatch({
+      type: ACTIONS.GET_ONE_POST,
+      payload: data,
+    })
+  }
     //! EDIT
+    const editPost = async(id, editedPost)=>{
+      await axios.patch(`${API}/${id}`, editedPost)
+      navigate("/posts")
+    }
 
     const values = {
       addPost,
       getPosts, 
       posts: state.posts,
-      deletePost
-
+      deletePost,
+      getOnePost,
+      editPost,
+      onePost: state.onePost
     }
   return (
     <postContext.Provider value={values}>{children}</postContext.Provider>

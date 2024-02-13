@@ -167,16 +167,17 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-            
+          <Link to="/">
           <Typography
             variant="h6"
             noWrap
-            component="div"
+            component="a"
+            href="/"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
             META
           </Typography>
-
+          </Link>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -189,7 +190,7 @@ export default function PrimarySearchAppBar() {
           {pages.map((elem) => (
             <Link key={elem.id} to={elem.link}>
               <MenuItem>
-                <Typography sx={{ color: "white", }} textAlign={"center"}>
+                <Typography sx={{ color: "white",  }} textAlign={"center"}>
                   {elem.tittle}
                 </Typography>
               </MenuItem>
