@@ -35,7 +35,6 @@ const PostCard = ({elem}) => {
           EDIT
          </Button>
        </CardContent>
-       <Detail  />
     </Card>
     </div>
   )

@@ -167,9 +167,13 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
+            
           <Typography
             variant="h6"
             noWrap
+            component="a"
+            href="/"
+            sx={{ display: { xs: "none", sm: "block" } }}
             component="a"
             href="/"
             sx={{
@@ -185,7 +189,7 @@ export default function PrimarySearchAppBar() {
           >
             META
           </Typography>
-
+          </Link>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
