@@ -16,15 +16,19 @@ import { useNavigate } from "react-router-dom";
 import { usePosts } from "../context/PostContextProvider";
 import { useBM } from "../context/BMProvider";
 
-const PostCard = ({ elem }) => {
-  const { addPost, deletePost } = usePosts();
+const PostCard = ({ elem, onFavoriteClick }) => {
+  const { addPost, deletePost, increaseLikes } = usePosts();
   const navigate = useNavigate();
-  const [count, setCount] = useState(0);
+  const [favoriteCount, setFavoriteCount] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
   const { addPostToBookmarks, checkPostInBm } = useBM();
 
   const handleClick = () => {
-    setIsFavorite(true); // Устанавливаем флаг isFavorite в true только при первом клике
+    setIsFavorite(true);
+  };
+
+  const handleLikeClick = () => {
+    increaseLikes(); // Вызываем функцию увеличения лайков из контекста
   };
 
   return (
@@ -68,7 +72,14 @@ const PostCard = ({ elem }) => {
           >
             EDIT
           </Button>
-          <IconButton size="large" color="inherit" onClick={handleClick}>
+          <IconButton
+            size="large"
+            color="inherit"
+            onClick={() => {
+              handleClick();
+              handleLikeClick();
+            }}
+          >
             {isFavorite ? (
               <FavoriteIcon style={{ color: "red" }} />
             ) : (

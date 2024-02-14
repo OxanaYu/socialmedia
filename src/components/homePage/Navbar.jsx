@@ -18,6 +18,8 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link, useSearchParams } from "react-router-dom";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
+import PostCard from "../post/PostCard";
+import { usePosts } from "../context/PostContextProvider";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -68,11 +70,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState(searchParams.get("q") || "");
+
+  console.log(search);
   useEffect(() => {
     setSearchParams({
       q: search,
     });
   }, [search]);
+
+  const { likesCount } = usePosts();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -183,13 +189,20 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Link to="/">
+          <Link style={{ textDecoration: "none" }} to="/">
             <Typography
               variant="h6"
               noWrap
               component="a"
               href="/"
-              sx={{ display: { xs: "none", sm: "block" } }}
+              sx={{
+                display: {
+                  xs: "none",
+                  sm: "block",
+                  color: "white",
+                  textDecoration: "none",
+                },
+              }}
             >
               META
             </Typography>
@@ -222,7 +235,9 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: "flex" }}>
             <IconButton size="large" color="inherit">
-              <FavoriteIcon />
+              <Badge badgeContent={likesCount} color="error">
+                <FavoriteIcon />
+              </Badge>
             </IconButton>
             <IconButton
               size="large"

@@ -8,6 +8,7 @@ export const usePosts = () => useContext(postContext);
 const INIT_STATE = {
   posts: [],
   onePost: {},
+  likesCount: 0,
 };
 
 const reducer = (state = INIT_STATE, action) => {
@@ -17,6 +18,8 @@ const reducer = (state = INIT_STATE, action) => {
 
     case ACTIONS.GET_ONE_POST:
       return { ...state, onePost: action.payload };
+    case ACTIONS.INCREASE_LIKES:
+      return { ...state, likesCount: state.likesCount + 1 };
 
     default:
       return state;
@@ -35,6 +38,7 @@ const PostContextProvider = ({ children }) => {
   // ! GET
   const getPosts = async () => {
     const { data } = await axios(`${API}${window.location.search}`);
+    console.log(data);
     dispatch({
       type: ACTIONS.GET_POSTS,
       payload: data,
@@ -60,6 +64,10 @@ const PostContextProvider = ({ children }) => {
     navigate("/posts");
   };
 
+  const increaseLikes = () => {
+    dispatch({ type: ACTIONS.INCREASE_LIKES });
+  };
+
   const values = {
     addPost,
     getPosts,
@@ -68,6 +76,8 @@ const PostContextProvider = ({ children }) => {
     getOnePost,
     editPost,
     onePost: state.onePost,
+    likesCount: state.likesCount,
+    increaseLikes,
   };
   return <postContext.Provider value={values}>{children}</postContext.Provider>;
 };
