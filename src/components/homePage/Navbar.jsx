@@ -136,11 +136,12 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <Box>
+        {/* <Link to="/bm" style={{ textDecoration: "none", color: "inherit" }}>
           <IconButton size="large" color="inherit">
             <BookmarkIcon />
           </IconButton>
-        </Box>
+          <Typography textAlign="center">Bookmarks</Typography>
+        </Link> */}
 
         <IconButton size="large" color="inherit">
           <FavoriteIcon />
@@ -209,14 +210,14 @@ export default function PrimarySearchAppBar() {
                 to={elem.link}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <Typography textAlign="center">{elem.title}</Typography>
+                <Typography textAlign="center">{elem.tittle}</Typography>
               </Link>
             </MenuItem>
           ))}
           <Box>
-            <IconButton size="large" color="inherit">
+            {/* <IconButton size="large" color="inherit">
               <BookmarkIcon />
-            </IconButton>
+            </IconButton> */}
           </Box>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: "flex" }}>

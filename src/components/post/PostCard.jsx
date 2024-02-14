@@ -33,7 +33,7 @@ const PostCard = ({ elem }) => {
         sx={{
           height: 450,
           boxShadow: "none",
-          margin: "40px 40px",
+          margin: "40px 30px",
           width: { md: "30vw", lg: "19vw" },
         }}
       >
@@ -54,16 +54,16 @@ const PostCard = ({ elem }) => {
           </Typography>
           <Button
             onClick={() => deletePost(elem.id)}
-            color="error"
-            variant="contained"
+            color="primary"
+            variant="outlined"
             size="medium"
           >
             DELETE
           </Button>
           <Button
             onClick={() => navigate(`/edit/${elem.id}`)}
-            color="success"
-            variant="contained"
+            color="secondary"
+            variant="outlined"
             size="medium"
           >
             EDIT

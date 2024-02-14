@@ -26,7 +26,13 @@ const BookMark = () => {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-around",
+        flexWrap: "wrap",
+      }}
+    >
       {bookmarks.posts.map((elem) => (
         <Card
           key={elem.item.id}
