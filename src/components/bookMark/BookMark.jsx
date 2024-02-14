@@ -1,55 +1,70 @@
 import {
   Button,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
+import { useBM } from "../context/BMProvider";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
 const BookMark = () => {
-  return (
-    <TableContainer component={Paper}>
-      <Table aria-label="simple table" sx={{ minWidth: 650 }}>
-        <TableHead>
-          <TableRow>
-            <TableCell align="right">Picture</TableCell>
-            <TableCell align="right">Title</TableCell>
-            <TableCell align="right">Category</TableCell>
-            <TableCell align="right">Price</TableCell>
-            <TableCell align="right">Count</TableCell>
-            <TableCell align="right">SubPrice</TableCell>
-            <TableCell align="right">-</TableCell>
-          </TableRow>
-        </TableHead>
+  const { bookmarks, checkPostInBm, deletePostFromBM, getPost } = useBM();
+  console.log(bookmarks.posts);
 
-        <TableBody>
-          <TableRow
-            sx={{
-              "&:last-child td, &:last-child th": { border: 0 },
-            }}
-          >
-            <TableCell align="right" scope="row" component="th">
-              <img alt="" width={70} />
-            </TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right">
-              <input type="number" min={1} max={20} />
-            </TableCell>
-            <TableCell> </TableCell>
-            <TableCell align="right">
-              <Button>DELETE</Button>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-      <Button>BUY NOW FOR </Button>
-    </TableContainer>
+  useEffect(() => {
+    getPost();
+  }, []);
+
+  const cartCleaner = () => {
+    localStorage.removeItem("bm");
+    getPost();
+    console.log(bookmarks);
+  };
+
+  return (
+    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      {bookmarks.posts.map((elem) => (
+        <Card
+          key={elem.item.id}
+          sx={{
+            height: 360,
+            boxShadow: "none",
+            margin: "40px 40px",
+            width: { md: "30vw", lg: "19vw" },
+          }}
+        >
+          <CardActionArea>
+            <CardMedia
+              sx={{ height: 240, borderRadius: 4 }}
+              image={elem.item.Image}
+            />
+          </CardActionArea>
+          <CardContent sx={{ padding: "20px 5px 0 5px" }}>
+            <Typography
+              variant="h5"
+              fontSize="25px"
+              fontWeight="700"
+              component="div"
+            >
+              {elem.item.title}
+            </Typography>
+            <Typography color="black" fontSize="15px" fontWeight="700">
+              {elem.item.description}
+            </Typography>
+            <Button
+              variant="outlined"
+              onClick={() => deletePostFromBM(elem.item.id)}
+            >
+              REMOVE
+            </Button>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
   );
 };
 

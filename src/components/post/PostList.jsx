@@ -1,26 +1,23 @@
-import React, { useEffect } from "react";
 import React, { useEffect, useState } from "react";
 import { usePosts } from "../context/PostContextProvider";
 import PostCard from "./PostCard";
 import { Box } from "@mui/material";
 import PaginationControlled from "./Pagination";
+import { useSearchParams } from "react-router-dom";
 
 const PostList = () => {
   const { posts, getPosts } = usePosts();
+  // ! SEARCH
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     getPosts();
-  }, []);
-
-  console.log(posts);
-
-  useEffect(() => {
-    getPosts();
-  }, []);
+  }, [searchParams]);
 
   //! PAGINATION
   const [page, setPage] = useState(1);
-  const itemPerPage = 3;
+  const itemPerPage = 4;
   const count = Math.ceil(posts.length / itemPerPage);
   console.log(count);
   const currentData = () => {
