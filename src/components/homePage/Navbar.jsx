@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,8 +15,9 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Link } from "react-router-dom";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Link, useSearchParams } from "react-router-dom";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -45,10 +46,10 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const pages = [
-    { id: 1, tittle: "Posts", link: "/posts" },
-    { id: 2, tittle: "Add Post", link: "/addpage" },
-    { id: 3, tittle: "Contacts", link: "/contacts" },
-  ];
+  { id: 1, tittle: "Posts", link: "/posts" },
+  { id: 2, tittle: "Add Post", link: "/addpage" },
+  { id: 3, tittle: "Bookmarks", link: "/bm" },
+];
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
@@ -65,6 +66,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("q") || "");
+  useEffect(() => {
+    setSearchParams({
+      q: search,
+    });
+  }, [search]);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -127,9 +136,16 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-      <IconButton size="large" color="inherit">
-        <FavoriteIcon/>
-      </IconButton>
+        {/* <Link to="/bm" style={{ textDecoration: "none", color: "inherit" }}>
+          <IconButton size="large" color="inherit">
+            <BookmarkIcon />
+          </IconButton>
+          <Typography textAlign="center">Bookmarks</Typography>
+        </Link> */}
+
+        <IconButton size="large" color="inherit">
+          <FavoriteIcon />
+        </IconButton>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
             <MailIcon />
@@ -168,15 +184,15 @@ export default function PrimarySearchAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Link to="/">
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            META
-          </Typography>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              META
+            </Typography>
           </Link>
           <Search>
             <SearchIconWrapper>
@@ -185,22 +201,29 @@ export default function PrimarySearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={(e) => setSearch(e.target.value)}
             />
           </Search>
           {pages.map((elem) => (
-            <Link key={elem.id} to={elem.link}>
-              <MenuItem>
-                <Typography sx={{ color: "white",  }} textAlign={"center"}>
-                  {elem.tittle}
-                </Typography>
-              </MenuItem>
-            </Link>
+            <MenuItem key={elem.id}>
+              <Link
+                to={elem.link}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <Typography textAlign="center">{elem.tittle}</Typography>
+              </Link>
+            </MenuItem>
           ))}
+          <Box>
+            {/* <IconButton size="large" color="inherit">
+              <BookmarkIcon />
+            </IconButton> */}
+          </Box>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <IconButton size="large" color="inherit">
-        <FavoriteIcon/>
-      </IconButton>
+          <Box sx={{ display: "flex" }}>
+            <IconButton size="large" color="inherit">
+              <FavoriteIcon />
+            </IconButton>
             <IconButton
               size="large"
               aria-label="show 4 new mails"
@@ -210,7 +233,7 @@ export default function PrimarySearchAppBar() {
                 <MailIcon />
               </Badge>
             </IconButton>
-            
+
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
