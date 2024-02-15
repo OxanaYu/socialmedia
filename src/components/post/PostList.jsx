@@ -12,6 +12,7 @@ const PostList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    setPage(1);
     getPosts();
   }, [searchParams]);
 
